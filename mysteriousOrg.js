@@ -14,6 +14,8 @@ const mockUpStrand = () => {
 };
 
 function pAequorFactory(id, dnaArr) {
+    const originalDna = [...dnaArr];
+
   return {
     specimenNum: id,
     dna: dnaArr,
@@ -29,7 +31,48 @@ function pAequorFactory(id, dnaArr) {
       }
 
       this.dna[randomIndex] = newBase;
-      return this.dna;
+      
+      return console.log(`Original DNA: ${originalDna} | Mutated DNA: ${this.dna}`);
     },
+
+    compareDNA(otherPaequor) {
+      if (!(otherPaequor instanceof Object) || !('dna' in otherPaequor) || !('specimenNum' in otherPaequor)) {
+        throw new Error('Invalid pAequor object');
+      }
+
+      let identicalBases = 0;
+      for (let i = 0; i < this.dna.length; i++) {
+        if (this.dna[i] === otherPaequor.dna[i]) {
+          identicalBases++;
+        }
+      }
+
+      const percentage = (identicalBases / this.dna.length) * 100;
+      console.log(`specimen #${this.specimenNum} and specimen #${otherPaequor.specimenNum} have ${percentage.toFixed(2)}% DNA in common.`);
+    }
   };
 }
+
+
+
+pAequorFactory(1, mockUpStrand()).mutate();
+pAequorFactory(1, mockUpStrand()).compareDNA({
+  specimenNum: 2,
+  dna: [
+    "G",
+    "A",
+    "T",
+    "C",
+    "C",
+    "G",
+    "A",
+    "T",
+    "C",
+    "C",
+    "G",
+    "A",
+    "T",
+    "C",
+    "C",
+  ],
+});
