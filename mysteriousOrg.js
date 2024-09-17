@@ -20,6 +20,27 @@ function pAequorFactory(id, dnaArr) {
     specimenNum: id,
     dna: dnaArr,
 
+    complementStrand() {
+        const complementStrand = [];
+
+        this.dna.map(base => {
+            if(base === "A") {
+                return complementStrand.push("T")
+            }
+            if(base === "T") {
+                return complementStrand.push("A")
+            }
+            if(base === "G") {
+                return complementStrand.push("C")
+            }
+            if(base === "C") {
+                return complementStrand.push("G")
+            }
+            return complementStrand;
+        })
+        return `DNA: ${originalDna} \n\nComplement: ${complementStrand}\n`;
+    },
+
     willLikelySurvive() {
         const countGC = this.dna.filter(base => base === 'C' || base === 'G').length;
 
@@ -41,7 +62,7 @@ function pAequorFactory(id, dnaArr) {
 
       this.dna[randomIndex] = newBase;
       
-      return console.log(`Original DNA: ${originalDna} | Mutated DNA: ${this.dna}`);
+      return console.log(`Original DNA: ${originalDna} \n\n Mutated DNA: ${this.dna}`);
     },
 
     compareDNA(otherPaequor) {
@@ -80,4 +101,5 @@ function createSurvivors(numSurvivors) {
 }
 
 // Create 30 instances of pAequor that can survive
-console.log(createSurvivors(30));
+//console.log(createSurvivors(30));
+console.log(pAequorFactory(1, mockUpStrand()).complementStrand())
