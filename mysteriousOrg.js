@@ -101,5 +101,6 @@ function createSurvivors(numSurvivors) {
 }
 
 // Create 30 instances of pAequor that can survive
-//console.log(createSurvivors(30));
+console.log(createSurvivors(30));
+
 console.log(pAequorFactory(1, mockUpStrand()).complementStrand())
