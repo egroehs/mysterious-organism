@@ -20,6 +20,15 @@ function pAequorFactory(id, dnaArr) {
     specimenNum: id,
     dna: dnaArr,
 
+    willLikelySurvive() {
+        const countGC = this.dna.filter(base => base === 'C' || base === 'G').length;
+
+        const percentageCG = (countGC / this.dna.length) * 100;
+
+        return percentageCG >= 60;
+
+    },
+
     mutate() {
       const randomIndex = Math.floor(Math.random() * 15);
 
@@ -76,3 +85,5 @@ pAequorFactory(1, mockUpStrand()).compareDNA({
     "C",
   ],
 });
+
+console.log(pAequorFactory(3, mockUpStrand()).willLikelySurvive());
