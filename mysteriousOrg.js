@@ -62,28 +62,22 @@ function pAequorFactory(id, dnaArr) {
   };
 }
 
+// Function to create multiple pAequor instances that can survive
+function createSurvivors(numSurvivors) {
+  const survivors = [];
+  
+  while (survivors.length < numSurvivors) {
+    const id = survivors.length + 1;
+    const dna = mockUpStrand();
+    const pAequor = pAequorFactory(id, dna);
 
+    if (pAequor.willLikelySurvive()) {
+      survivors.push(pAequor);
+    }
+  }
+  
+  return survivors;
+}
 
-pAequorFactory(1, mockUpStrand()).mutate();
-pAequorFactory(1, mockUpStrand()).compareDNA({
-  specimenNum: 2,
-  dna: [
-    "G",
-    "A",
-    "T",
-    "C",
-    "C",
-    "G",
-    "A",
-    "T",
-    "C",
-    "C",
-    "G",
-    "A",
-    "T",
-    "C",
-    "C",
-  ],
-});
-
-console.log(pAequorFactory(3, mockUpStrand()).willLikelySurvive());
+// Create 30 instances of pAequor that can survive
+console.log(createSurvivors(30));
